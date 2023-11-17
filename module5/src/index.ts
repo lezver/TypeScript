@@ -397,11 +397,9 @@
 
   console.log(arr);
 
-  const promise: Promise<string> = new Promise(resolve => {
-    setInterval(() => {
-      resolve('Done!');
-    }, 1000);
-  });
+  const promise: Promise<string> = new Promise(resolve =>
+    setInterval(() => resolve('Done!'), 1000)
+  );
 
   promise.then(data => {
     console.log(data);
@@ -512,6 +510,28 @@
   }
 
   console.log(extractValue({ name: 'Sergai' }, 'name'));
+
+  interface User {
+    name: string;
+    age?: number;
+    date?: Date;
+    sex: string;
+    isLove: boolean;
+  }
+
+  const anjela: User = {
+    name: 'Anjela',
+    age: 18,
+    sex: 'female',
+    isLove: false,
+  };
+
+  const foo = <T extends User, U extends keyof T>(obj: T, key: U) =>
+    console.log(obj[key]);
+
+  foo(anjela, 'name');
+  foo(anjela, 'age');
+  foo(anjela, 'isLove');
 })();
 
 //   Generic classes
@@ -534,6 +554,59 @@
   store.addItem('test2');
   store.addItem('test3');
   console.log(store.getItems());
+
+  class ListOfNumbers<T extends number> {
+    private list: T[] = [];
+
+    public addNumber(item: T): void {
+      this.list.push(item);
+    }
+
+    public showList(): T[] {
+      return this.list;
+    }
+  }
+
+  const listOfNumbers = new ListOfNumbers();
+
+  listOfNumbers.addNumber(1);
+  listOfNumbers.addNumber(2);
+  listOfNumbers.addNumber(3);
+  console.log('this is: LIST OF NUMBERS', listOfNumbers.showList());
+
+  interface ExampleObj {
+    name: string;
+    price: number;
+    id: number;
+  }
+
+  class ListOfObj<T extends ExampleObj> {
+    private list: T[] = [];
+
+    public addObj(obj: T): void {
+      this.list.push(obj);
+    }
+
+    public showList(): T[] {
+      return this.list;
+    }
+
+    public removeObj(id: number): T[] {
+      return (this.list = this.list.filter(item => item.id !== id));
+    }
+  }
+
+  const listOfObj = new ListOfObj();
+
+  listOfObj.addObj({ id: 1, name: 'potato', price: 10 });
+  listOfObj.addObj({ id: 2, name: 'banana', price: 50 });
+  listOfObj.addObj({ id: 3, name: 'orange', price: 80 });
+
+  console.log(listOfObj.showList());
+
+  listOfObj.removeObj(2);
+
+  console.log(listOfObj.showList());
 })();
 
 //   Utility types - Partial
@@ -554,6 +627,28 @@
   }
 
   console.log(createPerson('Valdemart', 9999));
+
+  type IUser = {
+    name: string;
+    age: number;
+    sex?: 'male' | 'female';
+  };
+
+  const arrowFoo = (
+    name: string,
+    age: number,
+    sex: 'male' | 'female'
+  ): IUser => {
+    const user: Partial<IUser> = {
+      name,
+      age,
+      sex,
+    };
+
+    return user as IUser;
+  };
+
+  console.log(arrowFoo('Sukuna', 99999, 'male'));
 })();
 
 //   Utility types - Readonly
@@ -570,6 +665,21 @@
   };
 
   console.log(temp);
+
+  interface IUser {
+    name: string;
+  }
+
+  let listOfUsers: Readonly<IUser>[] = [];
+
+  const addUser = <T extends IUser>(obj: T) => listOfUsers.push(obj);
+
+  addUser({ name: 'Lich' });
+  addUser({ name: 'Thrall' });
+  addUser({ name: 'Bolaff' });
+  addUser({ name: 'Deathstar' });
+
+  console.log(listOfUsers);
 })();
 
 //   Utility types - Pick
@@ -579,11 +689,21 @@
     title: string;
     annotation: string;
     numberPage: number;
+    list: string[];
+    isOpen: boolean;
   }
 
-  const pageAnnotation: Pick<Page, 'title' | 'numberPage'> = {
-    title: 'h1',
-    numberPage: 3,
+  const pageAnnotation: Pick<Page, 'title' | 'annotation'> = {
+    title: 'title',
+    annotation: 'Short page',
   };
   console.log(pageAnnotation);
+
+  const pageInfo: Pick<Page, 'list' | 'isOpen' | 'numberPage'> = {
+    list: ['one', 'two', 'three'],
+    isOpen: true,
+    numberPage: 99,
+  };
+
+  console.log(pageInfo);
 })();

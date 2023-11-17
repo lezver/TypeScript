@@ -220,11 +220,7 @@
     arr.push(3);
     arr.push('generic');
     console.log(arr);
-    const promise = new Promise(resolve => {
-        setInterval(() => {
-            resolve('Done!');
-        }, 1000);
-    });
+    const promise = new Promise(resolve => setInterval(() => resolve('Done!'), 1000));
     promise.then(data => {
         console.log(data);
     });
@@ -278,6 +274,16 @@
         return obj[key];
     }
     console.log(extractValue({ name: 'Sergai' }, 'name'));
+    const anjela = {
+        name: 'Anjela',
+        age: 18,
+        sex: 'female',
+        isLove: false,
+    };
+    const foo = (obj, key) => console.log(obj[key]);
+    foo(anjela, 'name');
+    foo(anjela, 'age');
+    foo(anjela, 'isLove');
 })();
 (() => {
     class StoreClass {
@@ -296,6 +302,43 @@
     store.addItem('test2');
     store.addItem('test3');
     console.log(store.getItems());
+    class ListOfNumbers {
+        constructor() {
+            this.list = [];
+        }
+        addNumber(item) {
+            this.list.push(item);
+        }
+        showList() {
+            return this.list;
+        }
+    }
+    const listOfNumbers = new ListOfNumbers();
+    listOfNumbers.addNumber(1);
+    listOfNumbers.addNumber(2);
+    listOfNumbers.addNumber(3);
+    console.log('this is: LIST OF NUMBERS', listOfNumbers.showList());
+    class ListOfObj {
+        constructor() {
+            this.list = [];
+        }
+        addObj(obj) {
+            this.list.push(obj);
+        }
+        showList() {
+            return this.list;
+        }
+        removeObj(id) {
+            return (this.list = this.list.filter(item => item.id !== id));
+        }
+    }
+    const listOfObj = new ListOfObj();
+    listOfObj.addObj({ id: 1, name: 'potato', price: 10 });
+    listOfObj.addObj({ id: 2, name: 'banana', price: 50 });
+    listOfObj.addObj({ id: 3, name: 'orange', price: 80 });
+    console.log(listOfObj.showList());
+    listOfObj.removeObj(2);
+    console.log(listOfObj.showList());
 })();
 (() => {
     function createPerson(name, age) {
@@ -305,6 +348,15 @@
         return person;
     }
     console.log(createPerson('Valdemart', 9999));
+    const arrowFoo = (name, age, sex) => {
+        const user = {
+            name,
+            age,
+            sex,
+        };
+        return user;
+    };
+    console.log(arrowFoo('Sukuna', 99999, 'male'));
 })();
 (() => {
     const arr = ['one', 'two', 'three', 'four', 'five'];
@@ -313,12 +365,25 @@
         temperanture: 33,
     };
     console.log(temp);
+    let listOfUsers = [];
+    const addUser = (obj) => listOfUsers.push(obj);
+    addUser({ name: 'Lich' });
+    addUser({ name: 'Thrall' });
+    addUser({ name: 'Bolaff' });
+    addUser({ name: 'Deathstar' });
+    console.log(listOfUsers);
 })();
 (() => {
     const pageAnnotation = {
-        title: 'h1',
-        numberPage: 3,
+        title: 'title',
+        annotation: 'Short page',
     };
     console.log(pageAnnotation);
+    const pageInfo = {
+        list: ['one', 'two', 'three'],
+        isOpen: true,
+        numberPage: 99,
+    };
+    console.log(pageInfo);
 })();
 //# sourceMappingURL=index.js.map
