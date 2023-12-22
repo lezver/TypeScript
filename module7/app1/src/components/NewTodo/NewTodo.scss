@@ -1,0 +1,9 @@
+.new-todo-list {
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px dotted black;
+  > h2 {
+    color: red;
+    margin: 0;
+  }
+}

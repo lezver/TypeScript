@@ -1,0 +1,43 @@
+.add-todo {
+  padding: 24px;
+  background-color: rgb(227, 227, 227);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  > h2 {
+    text-align: center;
+    margin: 0;
+  }
+
+  > form {
+    display: inherit;
+    flex-direction: inherit;
+    gap: inherit;
+
+    > input {
+      background-color: transparent;
+      border: none;
+      outline: none;
+      border-bottom: 1px solid black;
+      border-radius: 4px;
+      font-size: 16px;
+      padding: 4px;
+    }
+
+    > button {
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 4px;
+      border-width: 3px;
+      padding: 8px;
+      text-transform: uppercase;
+      background-color: aqua;
+
+      &:active {
+        background-color: rgb(0, 231, 231);
+      }
+    }
+  }
+}

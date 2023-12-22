@@ -1,0 +1,26 @@
+.todo-list {
+  padding: 24px;
+  background-color: rgb(255, 230, 230);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  > h2 {
+    text-align: center;
+    margin: 0;
+  }
+
+  > ol {
+    padding: 0;
+    display: inherit;
+    flex-direction: inherit;
+    gap: inherit;
+
+    > li {
+      display: inherit;
+      justify-content: space-between;
+      gap: inherit;
+    }
+  }
+}
